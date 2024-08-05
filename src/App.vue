@@ -15,6 +15,8 @@ onHide(() => {
 <style lang="scss">
 // 字体图标
 @import '@/styles/fonts.scss';
+// uview
+@import 'vk-uview-ui/index.scss';
 
 view,
 navigator,
