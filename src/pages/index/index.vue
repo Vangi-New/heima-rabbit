@@ -6,6 +6,7 @@ import { onLoad } from '@dcloudio/uni-app'
 import { ref } from 'vue'
 import CategoryGrid from './components/CategoryGrid.vue'
 import HotPannel from './components/HotPannel.vue'
+import PageSkeleton from './components/PageSkeleton.vue'
 
 // banner图
 const list = ref()
@@ -37,10 +38,11 @@ const getHotPannelData = async () => {
   })
 }
 
+const loading = ref(true)
 onLoad(() => {
-  getHomeBannerData()
-  getHomeCategoryData()
-  getHotPannelData()
+  Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotPannelData()]).then(() => {
+    loading.value = false
+  })
 })
 
 import vgGuess from '@/components/vg-guess.vue'
@@ -55,16 +57,17 @@ const isTriggered = ref(false)
 const onRefresherrefresh = async () => {
   // 开启动画
   isTriggered.value = true
+  loading.value = true
   // 重置猜你喜欢组件数据
   guessRef.value?.resetData() // 加载数据
   await Promise.all([getHomeBannerData(), getHomeCategoryData(), getHotPannelData()]) // 关闭动画
   isTriggered.value = false
+  loading.value = false
 }
 </script>
 
 <template>
   <CustomNavbar></CustomNavbar>
-
   <!-- 滚动容器 -->
   <scroll-view
     enable-back-to-top
@@ -76,13 +79,16 @@ const onRefresherrefresh = async () => {
     @refresherrefresh="onRefresherrefresh"
     :refresher-triggered="isTriggered"
   >
-    <view class="index">
-      <u-swiper :list="list"></u-swiper>
-    </view>
-    <CategoryGrid :categoryList="categoryList"></CategoryGrid>
-    <HotPannel :list="hotPannelList"></HotPannel>
-    <!-- 猜你喜欢 -->
-    <vg-guess ref="guessRef" />
+    <template v-if="!loading">
+      <view class="index u-skeleton-rect">
+        <u-swiper :list="list"></u-swiper>
+      </view>
+      <CategoryGrid :categoryList="categoryList"></CategoryGrid>
+      <HotPannel :list="hotPannelList"></HotPannel>
+      <!-- 猜你喜欢 -->
+      <vg-guess ref="guessRef" />
+    </template>
+    <PageSkeleton v-else></PageSkeleton>
   </scroll-view>
 </template>
 
