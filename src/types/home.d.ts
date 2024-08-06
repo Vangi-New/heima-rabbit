@@ -1,3 +1,5 @@
+import type { GoodsItem } from './global'
+
 /** 首页-广告区域数据类型 */
 export type BannerItem = {
   /** 跳转链接 */
@@ -35,3 +37,5 @@ export type HotItem = {
   /** 推荐类型 */
   type: string
 }
+
+export type GuessItem = GoodsItem

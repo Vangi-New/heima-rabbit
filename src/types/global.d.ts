@@ -21,7 +21,7 @@ export type PageParams = {
 }
 
 /** 猜你喜欢-商品类型 */
-export type GuessItem = {
+export type GoodsItem = {
   /** 商品描述 */
   desc: string
   /** 商品折扣 */
