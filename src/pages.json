@@ -4,7 +4,9 @@
     {
       "path": "pages/index/index",
       "style": {
-        "navigationBarTitleText": "首页"
+        "navigationBarTitleText": "首页",
+        "navigationBarTextStyle": "white",
+        "navigationStyle": "custom" // 隐藏默认导航
       }
     },
     {
@@ -77,7 +79,9 @@
     "custom": {
       // uni-ui 规则如下配置  
       "^uni-(.*)": "@dcloudio/uni-ui/lib/uni-$1/uni-$1.vue",
-      "^u-(.*)": "vk-uview-ui/components/u-$1/u-$1.vue"
+      "^u-(.*)": "vk-uview-ui/components/u-$1/u-$1.vue",
+      // 以 vg- 开头的组件，在 components 目录中查找
+      "^vg-(.*)": "@/components/vg-$1.vue"
     }
   }
 }
