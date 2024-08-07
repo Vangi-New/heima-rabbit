@@ -34,6 +34,12 @@
 			}
 		},
 		{
+			"path": "pages/login/protocal",
+			"style": {
+				"navigationBarTitleText": "服务协议"
+			}
+		},
+		{
 			"path": "pages/hot/hot",
 			"style": {
 				"navigationBarTitleText": "hot"
@@ -94,6 +100,48 @@
 			"^u-(.*)": "vk-uview-ui/components/u-$1/u-$1.vue",
 			// 以 vg- 开头的组件，在 components 目录中查找
 			"^vg-(.*)": "@/components/vg-$1.vue"
+		}
+	},
+	"subPackages": [
+		{
+			"root": "pagesMember",
+			"pages": [
+				{
+					"path": "settings/settings",
+					"style": {
+						"navigationBarTitleText": "设置"
+					}
+				},
+				{
+					"path": "profile/profile",
+					"style": {
+						"navigationStyle": "custom",
+						"navigationBarTextStyle": "white",
+						"navigationBarTitleText": "个人信息"
+					}
+				},
+				{
+					"path": "address/address",
+					"style": {
+						"navigationBarTitleText": "地址管理"
+					}
+				},
+				{
+					"path": "address-form/address-form",
+					"style": {
+						"navigationBarTitleText": ""
+					}
+				}
+			]
+		}
+	],
+	// 分包预下载规则
+	"preloadRule": {
+		"pages/my/my": {
+			"network": "all",
+			"packages": [
+				"pagesMember"
+			]
 		}
 	}
 }
