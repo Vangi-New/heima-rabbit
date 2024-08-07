@@ -99,7 +99,7 @@ const onClickSwipeAction = (index: number, index1: number) => {
             @click="onClickSwipeAction"
             @open="openSwipeAction(index)"
           >
-            <view class="item-content" @tap="onChangeAddress(item)">
+            <view class="item-content" @tap.stop="onChangeAddress(item)">
               <view class="user">
                 {{ item.receiver }}
                 <text class="contact">{{ item.contact }}</text>
